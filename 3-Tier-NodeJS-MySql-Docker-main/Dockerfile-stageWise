@@ -1,0 +1,18 @@
+#stage-1
+FROM node:18-alpine 
+WORKDIR /usr/src/app/client
+COPY client/package*.json ./
+RUN npm install
+COPY client ./
+RUN npm run build
+
+#stage-2
+FROM node:18-alpine
+WORKDIR /usr/src/app/server
+COPY server/package*.json ./
+RUN npm install
+COPY server ./
+COPY --from=0 /usr/src/app/client/public ./public
+
+CMD ["npm","run","start"]
+
