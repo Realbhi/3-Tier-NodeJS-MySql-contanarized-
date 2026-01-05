@@ -87,11 +87,11 @@ app.delete('/api/users/:id', (req, res) => {
 });
 
 // Serve static files from the client/public directory
-app.use(express.static(path.join(__dirname, '../client/public')));
+app.use(express.static(path.join(__dirname, '../server/public')));
 
 // Serve index.html for all other routes
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../client/public', 'index.html'));
+  res.sendFile(path.join(__dirname, '../server/public', 'index.html'));
 });
 
 // Start server
